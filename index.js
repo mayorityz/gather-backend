@@ -6,7 +6,7 @@ import dotenv from 'dotenv';
 import connectDB from './config/db.js';
 
 // Routes
-
+import artisanRoutes from './routes/artisanRoutes.js';
 
 const app = express();
 dotenv.config({ path: "./config.env" });
@@ -16,7 +16,7 @@ app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 app.use(cors());
 
 // Middlewares
-
+app.use('/artisan', artisanRoutes);
 
 // connect to mongodb
 connectDB();
