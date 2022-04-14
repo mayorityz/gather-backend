@@ -13,6 +13,14 @@ const customerSchema = mongoose.Schema({
         type: String,
         required: true
     },
+    state: {
+        type: String,
+        required: true
+    },
+    lga: {
+        type: String,
+        required: true
+    },
     password: {
         type: String,
         required: true

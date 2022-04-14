@@ -4,6 +4,9 @@ import dotenv from 'dotenv';
 
 import Artisan from '../models/artisan.js';
 
+// to send emails
+import sendMail from '../config/email.js';
+
 dotenv.config({ path: "./config.env" });
 
 // create artisan
@@ -11,6 +14,13 @@ export const signupArtisan = async (req, res) => {
     const { 
         name, email, phone_number, profession, company_name, company_website, state, lga, password, confirmPassword
     } = req.body;
+
+    const sender_email = 'Seun <taiwoluwaseun8@gmail.com>';
+    const receiver_email = email;
+    const email_subject = 'Blockchain Lab got You';
+    const email_body = 'Welcome to Blockchain Lab';
+
+    sendMail(sender_email, receiver_email, email_subject, email_body);
 
     try {
         const existingArtisan = await Artisan.findOne({ email });
