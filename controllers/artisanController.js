@@ -2,7 +2,6 @@ import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 
-// schemas
 import Artisan from '../models/artisan.js';
 
 dotenv.config({ path: "./config.env" });
@@ -53,10 +52,8 @@ export const signinArtisan = async (req, res) => {
 
         if (!isPasswordCorrect) return res.status(400).json({ message: 'Invalid credentials.' });
 
-        const token = jwt.sign({ 
-            _id: existingArtisan._id, 
-            profession: existingArtisan.profession 
-            }, 
+        const token = jwt.sign(
+            { _id: existingArtisan._id, profession: existingArtisan.profession }, 
             process.env.TOKEN_SECRET, 
             { expiresIn: "1h" }
         );
