@@ -6,13 +6,16 @@ import dotenv from 'dotenv';
 import connectDB from './config/db.js';
 
 // Routes
-// artisan and customer routes
+// artisan and customer
 import artisanRoutes from './routes/artisanRoutes.js';
 import customerRoutes from './routes/customerRoutes.js';
 
-// states and lgas routes
+// states and lgas
 import statesRoutes from './routes/statesRoutes.js';
 import lgasRoutes from './routes/lgasRoutes.js';
+
+// subscribers
+import subscribersRoutes from './routes/subscribersRoutes.js';
 
 const app = express();
 dotenv.config({ path: "./config.env" });
@@ -29,6 +32,9 @@ app.use('/customer', customerRoutes);
 // artisan and customer
 app.use('/states', statesRoutes);
 app.use('/lgas', lgasRoutes);
+
+// subscribers
+app.use('/subscribers', subscribersRoutes);
 
 // connect to mongodb
 connectDB();
