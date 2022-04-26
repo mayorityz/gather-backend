@@ -43,7 +43,13 @@ export const signupArtisan = async (req, res) => {
             password: hashedPassword
         });
 
-        res.status(200).json(newArtisan);
+        const token = jwt.sign(
+            { _id: newArtisan._id, profession: newArtisan.profession }, 
+            process.env.TOKEN_SECRET, 
+            { expiresIn: "1h" }
+        );
+
+        res.status(200).json({ newArtisan, token });
     } catch (error) {
         res.status(500).json({ message: 'Something went wrong.' });
     }

@@ -31,7 +31,13 @@ export const signupCustomer = async (req, res) => {
 
         const newCustomer = await Customer.create({ name, email, phone_number, state, lga, password: hashedPassword });
 
-        res.status(200).json(newCustomer);
+        const token = jwt.sign(
+            { _id: newCustomer._id, email: newCustomer.email }, 
+            process.env.TOKEN_SECRET, 
+            { expiresIn: "1h" }
+        );
+
+        res.status(200).json({ newCustomer, token });
     } catch (error) {
         res.status(500).json({ message: 'Something went wrong.' });
     }
