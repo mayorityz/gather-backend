@@ -1,6 +1,7 @@
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
+import mongoose from 'mongoose';
 
 import Artisan from '../models/artisan.js';
 
@@ -94,4 +95,29 @@ export const getArtisansBySearch = async (req, res) => {
     } catch (error) {
         res.status(404).json({ message: error.message });
     }
+}
+
+// find artisan
+export const getArtisan = async (req, res) => {
+    const { id } = req.params;
+
+    try {
+        const artisan = await Artisan.findById(id);
+
+        res.status(200).json(artisan);
+    } catch (error) {
+        res.status(404).json({ message: error.message });
+    }
+}
+
+// update artisan
+export const updateArtisan = async (req, res) => {
+    const { id } = req.params;
+    const artisan = req.body;
+
+    if(!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send('No artisan with that id');
+
+    const updatedArtisan = await Artisan.findByIdAndUpdate(id, { ...artisan, id }, { new: true });
+
+    res.json(updatedArtisan);
 }
