@@ -79,3 +79,19 @@ export const signinArtisan = async (req, res) => {
         res.status(500).json({ message: 'Something went wrong.' });
     }
 }
+
+// find artisan by state or lga
+export const getArtisansBySearch = async (req, res) => {
+    const { searchQuery } = req.query;
+
+    try {
+        const state = new RegExp(searchQuery, 'i');
+        const lga = new RegExp(searchQuery, 'i');
+
+        const searchedArtisans = await Artisan.find({ $or: [ { state }, { lga } ] });
+
+        res.json({ data: searchedArtisans });
+    } catch (error) {
+        res.status(404).json({ message: error.message });
+    }
+}
