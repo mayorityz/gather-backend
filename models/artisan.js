@@ -36,7 +36,11 @@ const artisanSchema = mongoose.Schema({
     password: {
         type: String,
         required: true
-    }
+    },
+    customer_reviews: {
+        type: [String],
+        default: []
+    },
 });
 
 export default mongoose.model("Artisan", artisanSchema);

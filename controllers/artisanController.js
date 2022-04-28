@@ -121,3 +121,28 @@ export const updateArtisan = async (req, res) => {
 
     res.json(updatedArtisan);
 }
+
+export const customerReview = async (req, res) => {
+    const { id } = req.params;
+    const { value } = req.body;
+
+    const artisan = await Artisan.findById(id);
+
+    artisan.customer_reviews.push(value);
+
+    const updatedArtisan = await Artisan.findByIdAndUpdate(id, artisan, { new: true });
+
+    res.json(updatedArtisan);
+}
+
+export const getCustomerReviewsByArtisan = async (req, res) => {
+    const { id } = req.params;
+
+    try {
+        const artisan = await Artisan.findById(id);
+
+        res.status(200).json(artisan.customer_reviews);
+    } catch (error) {
+        res.status(404).json({ message: error.message });
+    }
+}
