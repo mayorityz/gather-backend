@@ -32,7 +32,7 @@ export const signupCustomer = async (req, res) => {
         const newCustomer = await Customer.create({ name, email, phone_number, state, lga, password: hashedPassword });
 
         const token = jwt.sign(
-            { _id: newCustomer._id, email: newCustomer.email }, 
+            { id: newCustomer._id, email: newCustomer.email }, 
             process.env.TOKEN_SECRET, 
             { expiresIn: "1h" }
         );
@@ -57,7 +57,7 @@ export const signinCustomer = async (req, res) => {
         if (!isPasswordCorrect) return res.status(400).json({ message: 'Invalid credentials.' });
 
         const token = jwt.sign(
-            { _id: existingCustomer._id, email: existingCustomer.email }, 
+            { id: existingCustomer._id, email: existingCustomer.email }, 
             process.env.TOKEN_SECRET, 
             { expiresIn: "1h" }
         );

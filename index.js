@@ -9,6 +9,7 @@ import connectDB from './config/db.js';
 // artisan and customer
 import artisanRoutes from './routes/artisanRoutes.js';
 import customerRoutes from './routes/customerRoutes.js';
+import productRoutes from './routes/productRoutes.js';
 
 // states and lgas
 import statesRoutes from './routes/statesRoutes.js';
@@ -28,6 +29,7 @@ app.use(cors());
 // artisan and customer
 app.use('/artisan', artisanRoutes);
 app.use('/customer', customerRoutes);
+app.use('/artisan/product', productRoutes);
 
 // artisan and customer
 app.use('/states', statesRoutes);
