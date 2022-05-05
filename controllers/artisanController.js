@@ -8,7 +8,7 @@ import Artisan from '../models/artisan.js';
 // to send emails
 import sendMail from '../config/email.js';
 
-dotenv.config({ path: "./config.env" });
+dotenv.config();
 
 // create artisan
 export const signupArtisan = async (req, res) => {

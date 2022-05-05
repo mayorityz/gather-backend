@@ -37,6 +37,17 @@ const artisanSchema = mongoose.Schema({
         type: String,
         required: true
     },
+    current_rating: {
+        type: Number,
+        default: 0
+    },
+    rating: [{
+        customer: {
+            type: String,
+            required: true
+        },
+        star: Number
+    }],
     customer_reviews: {
         type: [String],
         default: []

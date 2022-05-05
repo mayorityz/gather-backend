@@ -2,7 +2,7 @@ import dotenv from 'dotenv';
 import formData from 'form-data';
 import Mailgun from 'mailgun.js';
 
-dotenv.config({ path: "./config.env" });
+dotenv.config();
 
 const API_KEY = process.env.API_KEY;
 const DOMAIN = process.env.DOMAIN;

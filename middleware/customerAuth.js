@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 
-dotenv.config({ path: "./config.env" });
+dotenv.config();
 
 const customerAuth = async (req, res, next) => {
     try {

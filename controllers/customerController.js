@@ -7,7 +7,7 @@ import Customer from '../models/customer.js';
 // to send emails
 import sendMail from '../config/email.js';
 
-dotenv.config({ path: "./config.env" });
+dotenv.config();
 
 // create customer
 export const signupCustomer = async (req, res) => {
