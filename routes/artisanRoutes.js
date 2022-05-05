@@ -23,6 +23,6 @@ router.get('/profile/view_profile/:id', getArtisan);
 router.patch('/profile/update_profile/:id', artisanAuth, updateArtisan);
 
 router.post('/:id/customer_review', customerAuth, customerReview)
-router.get('/:id/customer_reviews', artisanAuth, getCustomerReviewsByArtisan);
+router.get('/:id/customer_reviews', getCustomerReviewsByArtisan);
 
 export default router;

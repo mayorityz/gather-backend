@@ -41,6 +41,6 @@ const artisanSchema = mongoose.Schema({
         type: [String],
         default: []
     },
-});
+}, { timestamps: true });
 
 export default mongoose.model("Artisan", artisanSchema);
