@@ -5,9 +5,11 @@ import {
     getArtisan, 
     getArtisansBySearch, 
     getCustomerReviewsByArtisan, 
+    rateArtisan, 
     signinArtisan, 
     signupArtisan, 
-    updateArtisan 
+    updateArtisan, 
+    updateCurrentRating
 } from '../controllers/artisanController.js';
 
 import artisanAuth from '../middleware/artisanAuth.js';
@@ -24,5 +26,7 @@ router.patch('/profile/update_profile/:id', artisanAuth, updateArtisan);
 
 router.post('/:id/customer_review', customerAuth, customerReview)
 router.get('/:id/customer_reviews', getCustomerReviewsByArtisan);
+router.post('/:id/rate_artisan', customerAuth, rateArtisan);
+router.patch('/:id/current_rating', updateCurrentRating);
 
 export default router;

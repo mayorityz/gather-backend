@@ -146,3 +146,28 @@ export const getCustomerReviewsByArtisan = async (req, res) => {
         res.status(404).json({ message: error.message });
     }
 }
+
+export const rateArtisan = async (req, res) => {
+    const { id } = req.params;
+    const { star } = req.body;
+
+    const artisan = await Artisan.findById(id);
+
+    artisan.rating.push({ customer: req.user.id, star });
+
+    const ratedArtisan = await Artisan.findByIdAndUpdate(id, artisan, { new: true });
+
+    res.json(ratedArtisan);
+}
+
+export const updateCurrentRating = async (req, res) => {
+    const { id } = req.params;
+
+    const artisan = await Artisan.findByIdAndUpdate(
+        id, 
+        [{ $set: { current_rating: { $round: [{ $avg: "$rating.star" }] } } }],
+        { new: true }
+    );
+
+    res.json(artisan.current_rating);
+}
