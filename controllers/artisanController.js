@@ -153,7 +153,16 @@ export const rateArtisan = async (req, res) => {
 
     const artisan = await Artisan.findById(id);
 
-    artisan.rating.push({ customer: req.user.id, star });
+    // check if currently logged in customer have rated artisan
+    const existingStar = artisan.rating.find(rate => rate.customer.toString() === req.user.id.toString());
+
+    // if customer haven't rated artisan, push rating
+    if (existingStar === undefined) {
+        artisan.rating.push({ customer: req.user.id, star });
+    } else {
+        // if customer has rated artisan, not allowed to rate again
+        return res.status(403).json({ message: 'You are not allowed to rate again.' });
+    }
 
     const ratedArtisan = await Artisan.findByIdAndUpdate(id, artisan, { new: true });
 
